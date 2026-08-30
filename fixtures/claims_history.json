@@ -1,0 +1,45 @@
+{
+  "MEM-001": [
+    {
+      "portal_claim_ref": "CLM-0901",
+      "date_of_service": "2026-03-15",
+      "provider_npi": "1234567890",
+      "diagnosis_codes": ["M54.5"],
+      "procedure_codes": ["97110"],
+      "billed_amount_cents": 12000,
+      "status": "paid"
+    }
+  ],
+  "MEM-002": [],
+  "MEM-003": [
+    {
+      "portal_claim_ref": "CLM-0801",
+      "date_of_service": "2026-06-01",
+      "provider_npi": "1098765432",
+      "diagnosis_codes": ["M54.5"],
+      "procedure_codes": ["97110"],
+      "billed_amount_cents": 45000,
+      "status": "paid"
+    },
+    {
+      "portal_claim_ref": "CLM-0802",
+      "date_of_service": "2026-06-01",
+      "provider_npi": "1987654321",
+      "diagnosis_codes": ["M54.5"],
+      "procedure_codes": ["97110"],
+      "billed_amount_cents": 48000,
+      "status": "paid"
+    }
+  ],
+  "MEM-004": [
+    {
+      "portal_claim_ref": "CLM-0701",
+      "date_of_service": "2026-04-10",
+      "provider_npi": "1234567890",
+      "diagnosis_codes": ["M54.5"],
+      "procedure_codes": ["97110"],
+      "billed_amount_cents": 10000,
+      "status": "paid"
+    }
+  ]
+}

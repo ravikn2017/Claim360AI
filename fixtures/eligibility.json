@@ -1,0 +1,42 @@
+[
+  {
+    "member_id": "MEM-001",
+    "plan_id": "PLAN-PT-BASIC",
+    "status": "active",
+    "effective_from": "2026-01-01",
+    "effective_to": "2026-12-31",
+    "covered_procedures": ["97110", "97112"],
+    "covered_diagnoses": ["M54.5"],
+    "policy_refs": ["POL-PT-001"]
+  },
+  {
+    "member_id": "MEM-002",
+    "plan_id": "PLAN-PT-BASIC",
+    "status": "inactive",
+    "effective_from": "2025-01-01",
+    "effective_to": "2025-12-31",
+    "covered_procedures": ["97110"],
+    "covered_diagnoses": ["M54.5"],
+    "policy_refs": ["POL-PT-001"]
+  },
+  {
+    "member_id": "MEM-003",
+    "plan_id": "PLAN-PT-BASIC",
+    "status": "active",
+    "effective_from": "2026-01-01",
+    "effective_to": "2026-12-31",
+    "covered_procedures": ["97110"],
+    "covered_diagnoses": ["M54.5"],
+    "policy_refs": ["POL-PT-001"]
+  },
+  {
+    "member_id": "MEM-004",
+    "plan_id": "PLAN-PT-BASIC",
+    "status": "active",
+    "effective_from": "2026-01-01",
+    "effective_to": "2026-12-31",
+    "covered_procedures": ["97110", "72148"],
+    "covered_diagnoses": ["M54.5"],
+    "policy_refs": ["POL-PT-001"]
+  }
+]

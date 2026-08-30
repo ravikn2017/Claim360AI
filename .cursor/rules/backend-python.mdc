@@ -1,0 +1,30 @@
+---
+description: Backend API, worker, models, and persistence conventions
+globs: backend/**/*.py
+alwaysApply: false
+---
+
+# Backend (FastAPI + Celery + SQLAlchemy)
+
+- Python 3.12, Pydantic v2, SQLAlchemy 2, Alembic. One package: `claim360` imported by API and worker.
+- Intake `POST /api/v1/portal/claims` must return **202** with `claim_id` after insert + enqueue. Do not run the graph on the request thread.
+- Claim isolation: no global in-memory claim dict. Persist in Postgres. Redis lock `lock:claim:{id}` around the graph.
+- `audit_events` is insert-only. Never UPDATE/DELETE audit rows.
+- Validate claim payload and agent outputs with Pydantic. Invalid agent JSON: retry then escalate (`FAILED_ESCALATED`), per LLD.
+- Structured logs via structlog with `claim_id`. Config via pydantic-settings / env (`docs/LLD-MVP.md` §17).
+- Specialist routes: JWT. Portal: `X-Portal-Key`. Seed one specialist user from env.
+
+```python
+# ❌ BAD — wait for agents in the request
+@router.post("/portal/claims")
+def submit(claim: ClaimIn):
+    result = run_graph(claim)  # blocks
+    return result
+
+# ✅ GOOD
+@router.post("/portal/claims", status_code=202)
+def submit(claim: ClaimIn, db: Session):
+    row = persist_received(db, claim)
+    orchestrate_claim.delay(str(row.id))
+    return {"claim_id": str(row.id), "status": "queued"}
+```

@@ -1,0 +1,24 @@
+---
+description: Specialist UI conventions for the MVP workspace
+globs: web/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Specialist UI
+
+- React 18 + Vite + TypeScript + Tailwind + React Router. No Next.js.
+- Screens: login, queue, claim workspace, audit timeline. No provider portal or member UI.
+- Workspace must show claim summary, three agent cards, proposed decision, editable letter, Approve and Escalate.
+- Call `/api/v1/specialist/*` with JWT. Poll the queue (e.g. 5s); no WebSockets.
+- Approve/escalate only when status is `AWAITING_HUMAN` or `ESCALATED`. Never send email/SMS from the UI.
+
+```tsx
+// ❌ BAD — hide agent findings
+<DecisionForm decision={proposed} />
+
+// ✅ GOOD — NFR-20: findings + editable letter + actions
+<AgentCards policy={p} fraud={f} mednec={m} />
+<textarea value={letter} onChange={...} />
+<button onClick={approve}>Approve</button>
+<button onClick={escalate}>Escalate</button>
+```

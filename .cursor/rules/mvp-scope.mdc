@@ -1,0 +1,18 @@
+---
+description: Claim360 MVP Phase 1 scope and source-of-truth docs
+alwaysApply: true
+---
+
+# MVP scope
+
+Canonical docs: `docs/REQUIREMENTS.md`, `docs/PLAN.md` §3, `docs/LLD-MVP.md`. If they conflict, **docs/LLD-MVP.md** wins for implementation.
+
+- Build the HITL loop only: intake → sequential Policy → Fraud → MedNec → proposed decision + draft letter → specialist review → stub disposition + audit.
+- Human review is required on every claim. No auto-approve.
+- Repo layout: `backend/claim360/` (api, worker, agents, adapters, models), sibling `web/`, root `fixtures/`, `prompts/`, `evals/`. Do not add `apps/` or `packages/` splits.
+- Local Homebrew Postgres + Redis on `localhost`. Do not add Docker Compose.
+- External systems are fixture adapters. No live payer, eligibility, payment, or email/SMS.
+- Agents stay in-process in the worker. No separate agent microservices.
+- Secrets in `.env` only. Synthetic data only; no real PHI in the repo.
+
+Out of MVP: HIPAA/RBAC product, OAuth, parallel agents, call bot, drift/canary, K8s, vector DB.

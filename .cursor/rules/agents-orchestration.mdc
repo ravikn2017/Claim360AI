@@ -1,0 +1,23 @@
+---
+description: Sequential agents, schemas, decision rules, and LLM fallbacks
+globs: backend/claim360/agents/**/*.py
+alwaysApply: false
+---
+
+# Agents and orchestration
+
+- Sequential LangGraph only: Policy → Fraud → Medical Necessity → `formulate_decision` → `draft_letter`. No parallel fan-out.
+- Agent I/O must match LLD schemas (`schema_version` `1.0`). Orchestrator picks the decision; agents do not.
+- Aggregation order (first match): high fraud → `pend`; ineligible → `deny`; needs_clarification → `pend`; not_necessary → `deny`; insufficient_info → `pend`; partial → `partial_approve`; else `approve`.
+- Ground prompts in `prompts/` + fixture policy snippets. Temperature 0 for agents, 0.2 for letter.
+- `LLM_ENABLED=false` must still produce schema-valid findings and a template letter (rules fallback). Golden evals run in this mode.
+- Tag each run with model / prompt / graph versions in `claims.agent_versions`.
+- Adapters live in `claim360.adapters` and read `fixtures/*.json` only.
+
+```python
+# ❌ BAD
+proposed = policy_result.outcome  # agent is not the adjudicator
+
+# ✅ GOOD
+proposed = formulate_decision(policy, fraud, mednec)  # LLD §7
+```

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "GL-LBP-01",
+    "title": "Low back pain — therapeutic exercise",
+    "diagnosis_codes": ["M54.5"],
+    "procedure_codes": ["97110"],
+    "determination_hint": "necessary",
+    "snippet": "Therapeutic exercise (97110) is appropriate for mechanical low back pain when function is documented."
+  },
+  {
+    "id": "GL-MRI-02",
+    "title": "Lumbar MRI without conservative care",
+    "diagnosis_codes": ["M54.5"],
+    "procedure_codes": ["72148"],
+    "determination_hint": "not_necessary",
+    "snippet": "Lumbar MRI (72148) is not medically necessary for uncomplicated low back pain without six weeks of conservative therapy."
+  }
+]
